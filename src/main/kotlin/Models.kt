@@ -1,3 +1,6 @@
+import com.vladsch.flexmark.html.HtmlRenderer
+import com.vladsch.flexmark.parser.Parser
+import com.vladsch.flexmark.util.options.MutableDataSet
 
 val definition = Page("Overview","",
         mutableListOf(
@@ -7,19 +10,34 @@ val definition = Page("Overview","",
 )
 
 
-open class TreeThing{}
+open abstract class TreeThing{
+    var name = ""
+    var subpages = mutableListOf<Page>()
+
+    override fun toString():String = name
+    abstract fun output():String
+
+    fun add(page:Page){
+        subpages.add(page)
+    }
+
+}
 
 class Service(val theName:String, var theSubpages: MutableList<Page> = mutableListOf<Page>()):TreeThing(){
 
-    var name = theName
-    var subpages = theSubpages
+    init {
+        name = theName
+        subpages = theSubpages
+    }
 
-    override fun toString():String = name
+    override fun output():String{
+        return toJson()
+    }
 
     fun toJson():String{
-        var output = "{\"name\":\"${name}\","
+        var output = "{\"name\":\"${name}\""
         output += ",\"subpages\":["
-        for(subpage in subpages) output += subpage
+        for(subpage in subpages) output += subpage.toJson()
         output += "]"
         return output
     }
@@ -27,18 +45,23 @@ class Service(val theName:String, var theSubpages: MutableList<Page> = mutableLi
 
 class Page(val theTitle: String, val theMarkdown: String, var theSubpages: MutableList<Page> = mutableListOf<Page>()):TreeThing(){
 
-    var title = theTitle
-    var markdown = theMarkdown
-    var subpages = theSubpages
+    init{
+        name = theTitle
+        subpages = theSubpages
+    }
 
-    override fun toString():String = title
+    var markdown = theMarkdown
+
+    override fun output():String{
+        return getMarkdown(markdown)
+    }
 
     fun toJson():String{
-        var output = "{\"title\":\"${title}\","
-        output += "\"markdown\":\"${markdown}\""
+        var output = "{\"title\":\"${name}\","
+        output += "\"markdown\":\"${sanatise()}\""
         if(subpages.isNotEmpty()) {
             output += ",\"subpages\":["
-            for(subpage in subpages) output += subpage
+            for(subpage in subpages) output += subpage.toJson()
             output += "]"
         }
 
@@ -46,8 +69,23 @@ class Page(val theTitle: String, val theMarkdown: String, var theSubpages: Mutab
         return output
     }
 
+    fun sanatise():String{
+        var output = markdown
+        output = output.replace("\n","\\n")
+        return output
+    }
 
-    fun add(page:Page){
-        subpages.add(page)
+
+    private fun getMarkdown(md:String):String{
+        val options = MutableDataSet()
+        val parser = Parser.builder(options).build()
+        val renderer = HtmlRenderer.builder(options).build()
+
+        // You can re-use parser and renderer instances
+        val document = parser.parse(md.trimMargin())
+        val html = renderer.render(document)  // "<p>This is <em>Sparta</em></p>\n"
+        return html
     }
 }
+
+

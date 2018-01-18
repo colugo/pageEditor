@@ -2,6 +2,64 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fde13ac1-9505-48c0-9b35-f51ee58a9113" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_ibm_icu_icu4j_58_1.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_openhtmltopdf_openhtmltopdf_core_0_0_1_RC9.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_openhtmltopdf_openhtmltopdf_jsoup_dom_converter_0_0_1_RC9.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_openhtmltopdf_openhtmltopdf_pdfbox_0_0_1_RC9.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_openhtmltopdf_openhtmltopdf_rtl_support_0_0_1_RC9.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_all_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_abbreviation_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_anchorlink_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_aside_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_attributes_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_autolink_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_definition_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_emoji_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_enumerated_reference_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_escaped_character_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_footnotes_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_gfm_issues_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_gfm_strikethrough_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_gfm_tables_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_gfm_tasklist_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_gfm_users_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_ins_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_jekyll_front_matter_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_jekyll_tag_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_superscript_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_tables_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_toc_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_typographic_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_wikilink_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_xwiki_macros_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_yaml_front_matter_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_ext_youtube_embedded_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_formatter_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_html_parser_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_jira_converter_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_pdf_converter_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_profile_pegdown_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_util_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vladsch_flexmark_flexmark_youtrack_converter_0_28_32.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_logging_commons_logging_1_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_pdfbox_fontbox_2_0_4.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_pdfbox_pdfbox_2_0_4.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jsoup_jsoup_1_10_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_nibor_autolink_autolink_0_6_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.0/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.0/fileHashes/fileHashes.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.0/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.0/fileHashes/fileHashes.lock" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/service-definition-tool_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/service-definition-tool_main.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/service-definition-tool_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/service-definition-tool_test.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/ModelsKt.class" afterPath="$PROJECT_DIR$/out/production/classes/ModelsKt.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/Page.class" afterPath="$PROJECT_DIR$/out/production/classes/Page.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/Screen$Companion.class" afterPath="$PROJECT_DIR$/out/production/classes/Screen$Companion.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/Screen$start$1.class" afterPath="$PROJECT_DIR$/out/production/classes/Screen$start$1.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/Screen.class" afterPath="$PROJECT_DIR$/out/production/classes/Screen.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/Service.class" afterPath="$PROJECT_DIR$/out/production/classes/Service.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/TreeThing.class" afterPath="$PROJECT_DIR$/out/production/classes/TreeThing.class" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Models.kt" afterPath="$PROJECT_DIR$/src/main/kotlin/Models.kt" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" afterPath="$PROJECT_DIR$/src/main/kotlin/Screen.kt" />
     </list>
@@ -25,8 +83,8 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="211">
+              <caret line="27" column="55" lean-forward="false" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -35,9 +93,11 @@
       <file leaf-file-name="Models.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/Models.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-107">
-              <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="975">
+              <caret line="73" column="41" lean-forward="false" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#143#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,10 +105,10 @@
       <file leaf-file-name="Screen.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/Screen.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="20">
+              <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
               <folding>
-                <element signature="e#0#213#0" expanded="true" />
+                <element signature="e#0#245#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,6 +134,11 @@
         <option value="Kotlin Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>mainHBox</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -266,8 +331,8 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4548721932000" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="204965041" />
+        <entry key="$PROJECT_DIR$" value="4548725876000" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="596332336" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="975608090" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="2790213916" />
       </map>
@@ -414,8 +479,8 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/Styles.kt" />
         <option value="$PROJECT_DIR$/src/test/kotlin/PageTest.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/DemoTreeViews.kt" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/kotlin/TreeViewApp.kt" />
+        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/kotlin/Models.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/Screen.kt" />
       </list>
@@ -727,14 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/TreeViewApp.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -743,20 +800,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="27" column="55" lean-forward="false" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/Models.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-107">
-          <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="975">
+          <caret line="73" column="41" lean-forward="false" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#143#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/Screen.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="20">
+          <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
           <folding>
-            <element signature="e#0#213#0" expanded="true" />
+            <element signature="e#0#245#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.vladsch.flexmark:flexmark-ext-wikilink:0.28.32">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vladsch.flexmark/flexmark-ext-wikilink/0.28.32/726a87d6c712de0780ec32486c5f2eca45d5f98/flexmark-ext-wikilink-0.28.32.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vladsch.flexmark/flexmark-ext-wikilink/0.28.32/94cb6a49785033c7cb12fc6b16dda1631ca3695a/flexmark-ext-wikilink-0.28.32-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
