@@ -1,18 +1,27 @@
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.util.options.MutableDataSet
 import javafx.application.Application
+import javafx.event.EventType
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.scene.control.TextArea
-import javafx.scene.control.TextField
-import javafx.scene.control.TreeItem
-import javafx.scene.control.TreeView
+import javafx.scene.control.*
+import javafx.scene.input.*
+import javafx.scene.layout.Background
+import javafx.scene.paint.Color
 import javafx.scene.web.WebView
 import javafx.stage.FileChooser
 import javafx.stage.Stage
+import java.awt.dnd.DragSourceDragEvent
+import java.awt.dnd.DragSourceEvent
 import kotlin.system.exitProcess
+import jdk.nashorn.internal.objects.NativeRegExp.source
+import javax.swing.text.Style
+import javax.xml.crypto.Data
+import javafx.scene.input.Dragboard
+
+
 
 
 class Screen : Application() {
@@ -21,13 +30,13 @@ class Screen : Application() {
     //var rootItem:TreeItem<TreeThing> = TreeItem(service)
 //    var tree: TreeView? = null
     var globalCount = 0
-    var selectedItem:TreeThing? = null
+    var selectedItem: TreeThing? = null
 //    var title = TextField("Title")
 //    var markdown = TextArea("Markdown")
 //    var browser = WebView()
 
 
-    override fun start(stage: Stage){
+    override fun start(stage: Stage) {
 
         val root = FXMLLoader.load<Parent>(Screen::class.java.getResource("scene.fxml"))
         scene = Scene(root, 640.0, 375.0)
@@ -39,6 +48,12 @@ class Screen : Application() {
         lookupComponents()
         addListeners()
 
+    }
+
+    private fun newTreeItem(thing: TreeThing): TreeItem<TreeThing> {
+        var treeItem = TreeItem<TreeThing>(thing)
+
+        return treeItem
     }
 
     private fun addListeners() {
@@ -57,6 +72,84 @@ class Screen : Application() {
             markdown!!.autosize()
 
         }
+
+        tree!!.setCellFactory {
+            object : TreeCell<TreeThing>() {
+                init {
+
+                    setOnDragDetected { event ->
+                        println(event)
+
+                        val db = this.startDragAndDrop(TransferMode.MOVE)
+                        val treeItem = this.treeItem
+                        db.setContent(mutableMapOf<DataFormat, Any>(DataFormat.PLAIN_TEXT to tree!!.getRow(treeItem).toString()))
+
+                        event.consume()
+                    }
+
+                    setOnDragDropped { event ->
+                        //println("dropped")
+                        //println(item)
+                        //println(event)
+                        val db = event.dragboard
+                        val index = db.getContent(DataFormat.PLAIN_TEXT).toString().toInt()
+
+                        val source: TreeItem<TreeThing> = tree!!.getTreeItem(index)
+                        println("Move " + source + " under " + treeItem)
+
+                        val sourcePage = source.value as Page
+                        val destPage = item
+
+                        if (destPage !in sourcePage.descendants()) {
+
+
+                            source.parent.children.remove(source)
+                            val indexInParent = treeItem.parent.children.indexOf(treeItem)
+                            treeItem.parent.children.add(indexInParent + 1, source)
+
+
+                            val sourcePageParent = sourcePage.parent!!
+
+
+                            println(sourcePage.parent!!.subpages)
+                            sourcePage.removeFromParent()
+                            println(sourcePage.parent!!.subpages)
+
+                            println(destPage.subpages)
+                            destPage.addAt(indexInParent, sourcePage)
+                            println(destPage.subpages)
+                        }
+                    }
+                    //setOnDragDone { println("done") }
+
+
+                    setOnMouseDragReleased { println("mouse drag") }
+
+                    setOnDragEntered {
+                        this.isUnderline = true
+
+                    }
+                    setOnDragExited {
+                        this.isUnderline = false
+                    }
+
+                    setOnDragOver { event ->
+                        event.acceptTransferModes(TransferMode.MOVE)
+                        event.consume()
+                    }
+
+                }
+
+                override fun updateItem(item: TreeThing?, empty: Boolean) {
+                    super.updateItem(item, empty)
+                    if (empty) {
+                        text = null
+                    } else {
+                        text = if (getItem() == null) "" else getItem().toString()
+                    }
+                }
+            }
+        }
     }
 
     private fun lookupComponents() {
@@ -67,13 +160,22 @@ class Screen : Application() {
     }
 
     @FXML
+    fun delete(){
+        if(tree!!.selectionModel.selectedItems.size == 1) {
+            val selected = tree!!.selectionModel.selectedItems.first()
+            selected.parent.children.remove(selected)
+            selected.value.removeFromParent()
+        }
+    }
+
+    @FXML
     fun newSubPage(){
         if(tree!!.selectionModel.selectedItems.size == 1) {
             val selected = tree!!.selectionModel.selectedItems.first()
             var newPage = Page("Page" + globalCount++, "")
             selected.value.add(newPage)
 
-            val item = TreeItem(newPage)
+            val item = newTreeItem(newPage)
 
             selected.children.add(item as TreeItem<TreeThing>)
             selected.isExpanded = true
@@ -92,7 +194,7 @@ class Screen : Application() {
         fileChooser.title = "Open Resource File"
         var file = fileChooser.showOpenDialog(stage)
         var service = ParseJson().parse(file.readText())
-        var rootItem: TreeItem<TreeThing> = TreeItem(service)
+        var rootItem: TreeItem<TreeThing> = newTreeItem(service)
 
 
         rootItem.value = service
@@ -134,8 +236,6 @@ class Screen : Application() {
 
 
             var html = getHTML(getPageData(page, indent = 1))
-            println(html)
-
             browser!!.engine.loadContent(html)
         }
     }
@@ -198,6 +298,7 @@ class Screen : Application() {
 
         @JvmStatic
         var markdown: TextArea? = null
+
     }
 
 }

@@ -35,3 +35,8 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+task run(type:JavaExec) {
+    main = "Screen"
+    classpath = sourceSets.main.runtimeClasspath
+}
