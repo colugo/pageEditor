@@ -1,31 +1,14 @@
-import javafx.collections.ObservableList
-import tornadofx.observable
-
-data class Group(val name: String, val children: List<Group>? = null)
-
-val group = Group("Parent",
-        listOf(
-                Group("Child 1"),
-                Group("Child 2"),
-                Group("Child 3", listOf(
-                        Group("Grand child 3.1",
-                                listOf(
-                                        Group("Great grandchild 3.1.1"),
-                                        Group("Great grandchild 3.1.2"))))
-                ),
-                Group("Child 4"))
-)
 
 val definition = Page("Overview","",
-        listOf(
+        mutableListOf(
             Page("Base URL",""),
             Page("Open API Specification","")
-        ).observable()
+        )
 )
 
 
 
-class Page(val theTitle: String, val theMarkdown: String, var theSubpages: ObservableList<Page> = listOf<Page>().observable()){
+class Page(val theTitle: String, val theMarkdown: String, var theSubpages: MutableList<Page> = mutableListOf<Page>()){
 
     var title = theTitle
     var markdown = theMarkdown
@@ -46,6 +29,6 @@ class Page(val theTitle: String, val theMarkdown: String, var theSubpages: Obser
 
 
     fun add(page:Page){
-        subpages = subpages.plus(page).observable()
+        subpages.add(page)
     }
 }
