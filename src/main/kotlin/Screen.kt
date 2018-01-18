@@ -1,21 +1,23 @@
-import javafx.scene.Scene
-import javafx.scene.layout.StackPane
-import javafx.stage.Stage
 import javafx.application.Application
 import javafx.geometry.Insets
+import javafx.scene.Scene
 import javafx.scene.control.*
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
+import javafx.stage.Stage
 
 class Screen : Application() {
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = "Tree View Sample"
 
-        val rootItem = TreeItem("Inbox")
+
+        var service = Service("service name")
+
+        val rootItem:TreeItem<TreeThing> = TreeItem(service)
         rootItem.isExpanded = true
         for (i in 1..5) {
-            val item = TreeItem("Message" + i)
+            val item = TreeItem(Page("Message" + i,"") as TreeThing)
             rootItem.children.add(item)
         }
         val tree = TreeView(rootItem)
@@ -30,8 +32,9 @@ class Screen : Application() {
         var textArea = TextArea("Markdown")
         var add = Button("Add")
         add.setOnAction {
-            val item = TreeItem("Message" + 8)
-            rootItem.children.add(item)
+            val item = TreeItem(Page("Message" + 8,"") as TreeThing)
+            rootItem.children.last().children.add(item)
+            rootItem.children.last().isExpanded = true
         }
         edit.children.add(textField)
         edit.children.add(textArea)
