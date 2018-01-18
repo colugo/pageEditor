@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screen">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#open" text="Open…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minWidth="-Infinity" prefHeight="371.0" prefWidth="613.0" VBox.vgrow="ALWAYS">
+      <children>
+            <HBox prefHeight="371.0" prefWidth="669.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TreeView fx:id="tree" prefHeight="200.0" prefWidth="200.0">
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#newSubPage" text="New subpage" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TreeView>
+                  <AnchorPane prefHeight="371.0" prefWidth="277.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="371.0" prefWidth="501.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+                           <children>
+                              <HBox maxHeight="29.0" minHeight="-Infinity" prefHeight="29.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="27.0" prefWidth="52.0" text=" Name : " />
+                                    <TextField fx:id="name" prefHeight="27.0" prefWidth="154.0" />
+                                 </children>
+                              </HBox>
+                              <Label text=" Page content (markdown) :" />
+                              <TextArea fx:id="markdown" wrapText="true" VBox.vgrow="ALWAYS" />
+                              <WebView id="browser" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../../../../../javafx/BasicApplication_css/BasicApplication.css" />
+  </stylesheets>
+</VBox>

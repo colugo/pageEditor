@@ -23,7 +23,7 @@ open abstract class TreeThing{
 
 }
 
-class Service(val theName:String, var theSubpages: MutableList<Page> = mutableListOf<Page>()):TreeThing(){
+class Service(val theName:String, private var theSubpages: MutableList<Page> = mutableListOf<Page>()):TreeThing(){
 
     init {
         name = theName
@@ -54,7 +54,7 @@ class Page(val theTitle: String, val theMarkdown: String, var theSubpages: Mutab
     var markdown = theMarkdown.replace("\\n","\n").replace("\\\"","\"")
 
     override fun output():String{
-        return getMarkdown(markdown)
+        return markdown
     }
 
     fun toJson():String{
@@ -76,18 +76,7 @@ class Page(val theTitle: String, val theMarkdown: String, var theSubpages: Mutab
         output = output.replace("\n","\\n")
         output = output.replace("\"","\\\"")
         return output
-    }
 
-
-    private fun getMarkdown(md:String):String{
-        val options = MutableDataSet()
-        val parser = Parser.builder(options).build()
-        val renderer = HtmlRenderer.builder(options).build()
-
-        // You can re-use parser and renderer instances
-        val document = parser.parse(md.trimMargin())
-        val html = renderer.render(document)  // "<p>This is <em>Sparta</em></p>\n"
-        return html
     }
 }
 

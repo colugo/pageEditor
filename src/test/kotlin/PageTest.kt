@@ -5,7 +5,7 @@ class PageTest {
 
     @Test
     fun pageAsString(){
-        Assert.assertEquals("""{"title":"Overview","markdown":""}""",Page("Overview","", mutableListOf<Page>()).toString())
+        Assert.assertEquals("""{"title":"Overview","markdown":""}""",Page("Overview","", mutableListOf<Page>()).toJson())
     }
 
     @Test
@@ -13,6 +13,6 @@ class PageTest {
         var page = Page("Overview","")
         var subpage = Page("Base URL","")
         page.add(subpage)
-        Assert.assertEquals("""{"title":"Overview","markdown":"","subpages":[{"title":"Base URL","markdown":""}]}""",page.toString())
+        Assert.assertEquals("""{"title":"Overview","markdown":"","subpages":[{"title":"Base URL","markdown":""}]}""",page.toJson())
     }
 }

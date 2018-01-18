@@ -1,7 +1,7 @@
 import com.beust.klaxon.JsonObject
+import com.beust.klaxon.Parser
 import com.beust.klaxon.array
 import com.beust.klaxon.string
-import com.beust.klaxon.Parser
 
 data class ServiceDescriptionPage(val title: String, val content: String, val subpages: List<ServiceDescriptionPage>?)
 data class ServiceDescription(val name: String, val id: String, val subpages: List<ServiceDescriptionPage>)
@@ -15,10 +15,10 @@ class ParseJson {
 
 
         var name = serviceJson.string("name")
-        var id = serviceJson.string("id")
+
 
         var pagesList = getSubPages(serviceJson)
-        var serviceDescription = ServiceDescription(name!!, id!!, pagesList.toList())
+        var serviceDescription = ServiceDescription(name!!, "", pagesList.toList())
 
         var service = Service(serviceDescription.name)
         for(pageDescription in serviceDescription.subpages){
@@ -70,5 +70,8 @@ class ParseJson {
             }
         }
     }
+
+
+
 
 }

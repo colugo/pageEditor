@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+            <HBox prefHeight="371.0" prefWidth="640.0">
+               <children>
+                  <TreeView prefHeight="200.0" prefWidth="200.0">
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="New subpage" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TreeView>
+                  <VBox prefHeight="371.0" prefWidth="466.0">
+                     <children>
+                        <HBox prefHeight="17.0" prefWidth="198.0">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="52.0" text=" Name: " />
+                              <TextField prefHeight="27.0" prefWidth="154.0" />
+                           </children>
+                        </HBox>
+                        <Label text=" Page content in markdown:" />
+                        <TextArea prefHeight="319.0" prefWidth="198.0" />
+                        <WebView prefHeight="318.0" prefWidth="453.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+      </children>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../../../../../javafx/BasicApplication_css/BasicApplication.css" />
+  </stylesheets>
+</VBox>
