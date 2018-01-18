@@ -10,8 +10,8 @@ import javafx.stage.Stage
 class Screen : Application() {
 
     val service = Service("service name")
-    val rootItem:TreeItem<TreeThing> = TreeItem(service)
-    val tree = TreeView(rootItem)
+    var rootItem:TreeItem<TreeThing> = TreeItem(service)
+    var tree = TreeView(rootItem)
     var globalCount = 0
     var selectedItem:TreeThing? = null
     var title = TextField("Title")
@@ -21,18 +21,6 @@ class Screen : Application() {
 
     override fun start(primaryStage: Stage) {
         primaryStage.title = "Tree View Sample"
-
-        /*
-        val rootItem:TreeItem<TreeThing> = TreeItem(service)
-        rootItem.isExpanded = true
-        for (i in 1..5) {
-            val item = TreeItem(Page("Message" + i,"") as TreeThing)
-            rootItem.children.add(item)
-        }
-
-        val tree = TreeView(rootItem)
-        */
-
 
         tree.selectionModel.select(rootItem)
         tree.getSelectionModel()
@@ -63,7 +51,12 @@ class Screen : Application() {
                 selected.isExpanded = true
             }
         }
+        var parse = Button("parse")
+        parse.setOnAction {
+           parse()
+        }
         treeVBox.children.add(add)
+        treeVBox.children.add(parse)
 
         var edit = VBox()
 
@@ -94,6 +87,27 @@ class Screen : Application() {
             page.markdown = newMarkdown
             browser.engine.loadContent(selectedItem!!.output())
         }
+    }
+
+    fun parse(){
+        println("Parsing")
+        var service = ParseJson().parse(markdown.text)
+        rootItem.value = service
+        for(page in service.subpages){
+            var item = TreeItem<Page>(page)
+            rootItem.children.add(item as TreeItem<TreeThing>)
+            rootItem.isExpanded = true
+            for(subpage in page.subpages) addParsedPages(item as TreeItem<TreeThing>, subpage)
+
+        }
+        tree.refresh()
+    }
+
+    fun addParsedPages(item:TreeItem<TreeThing>, subpage:Page){
+        var newItem = TreeItem<Page>(subpage)
+        newItem.isExpanded = true
+        item.children.add(newItem as TreeItem<TreeThing>)
+        for(subsubpage in subpage.subpages) addParsedPages(newItem,subsubpage)
     }
 
     fun updateViews(thing:TreeThing){

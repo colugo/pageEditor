@@ -35,10 +35,11 @@ class Service(val theName:String, var theSubpages: MutableList<Page> = mutableLi
     }
 
     fun toJson():String{
-        var output = "{\"name\":\"${name}\""
-        output += ",\"subpages\":["
-        for(subpage in subpages) output += subpage.toJson()
-        output += "]"
+        var output = "{\"name\":\"${name}\","
+        output += "\"subpages\":["
+        for(subpage in subpages) output += subpage.toJson() + ","
+        output = output.removeSuffix(",")
+        output += "]}"
         return output
     }
 }
@@ -50,7 +51,7 @@ class Page(val theTitle: String, val theMarkdown: String, var theSubpages: Mutab
         subpages = theSubpages
     }
 
-    var markdown = theMarkdown
+    var markdown = theMarkdown.replace("\\n","\n").replace("\\\"","\"")
 
     override fun output():String{
         return getMarkdown(markdown)
@@ -61,7 +62,8 @@ class Page(val theTitle: String, val theMarkdown: String, var theSubpages: Mutab
         output += "\"markdown\":\"${sanatise()}\""
         if(subpages.isNotEmpty()) {
             output += ",\"subpages\":["
-            for(subpage in subpages) output += subpage.toJson()
+            for(subpage in subpages) output += subpage.toJson() + ","
+            output = output.removeSuffix(",")
             output += "]"
         }
 
@@ -72,6 +74,7 @@ class Page(val theTitle: String, val theMarkdown: String, var theSubpages: Mutab
     fun sanatise():String{
         var output = markdown
         output = output.replace("\n","\\n")
+        output = output.replace("\"","\\\"")
         return output
     }
 
