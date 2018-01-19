@@ -20,8 +20,7 @@ import jdk.nashorn.internal.objects.NativeRegExp.source
 import javax.swing.text.Style
 import javax.xml.crypto.Data
 import javafx.scene.input.Dragboard
-
-
+import sun.plugin.dom.exception.InvalidStateException
 
 
 class Screen : Application() {
@@ -98,9 +97,9 @@ class Screen : Application() {
                         println("Move " + source + " under " + treeItem)
 
                         val sourcePage = source.value as Page
-                        val destPage = item
+                        val destPage = item as Page
 
-                        if (destPage !in sourcePage.descendants()) {
+                        if (destPage !in sourcePage.descendants() && source.value != treeItem.value) {
 
 
                             source.parent.children.remove(source)
@@ -111,13 +110,21 @@ class Screen : Application() {
                             val sourcePageParent = sourcePage.parent!!
 
 
-                            println(sourcePage.parent!!.subpages)
+                            //println(sourcePage.parent!!.subpages)
                             sourcePage.removeFromParent()
-                            println(sourcePage.parent!!.subpages)
+                            //println(sourcePage.parent!!.subpages)
 
-                            println(destPage.subpages)
-                            destPage.addAt(indexInParent, sourcePage)
-                            println(destPage.subpages)
+                            //println(destPage.subpages)
+                            destPage.parent!!.addAt(indexInParent, sourcePage)
+                            //println(destPage.subpages)
+/*
+                            if(source.parent.children.size != sourcePage.parent!!.subpages.size){
+                                throw InvalidStateException("View and MOdel out of sync!")
+                            }
+                            if(treeItem.parent.children.size != destPage.parent!!.subpages.size){
+                                throw InvalidStateException("View and MOdel out of sync!")
+                            }
+*/
                         }
                     }
                     //setOnDragDone { println("done") }
@@ -250,6 +257,7 @@ class Screen : Application() {
 
 
     private fun getPageData(page: Page, indent:Int): String {
+        if(indent > 10) return ""
         var rawContent = ""
         rawContent += pageWithHeading(page, indent)
         if (page.subpages != null) for (subpage in page.subpages) {

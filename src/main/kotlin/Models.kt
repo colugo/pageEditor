@@ -1,6 +1,7 @@
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.options.MutableDataSet
+import sun.plugin.dom.exception.InvalidStateException
 
 val definition = Page("Overview","",
         mutableListOf(
@@ -23,13 +24,12 @@ open abstract class TreeThing{
     }
 
     abstract fun removeFromParent()
-    fun remove(page:Page){
-        subpages.remove(page)
-    }
 
 
     fun addAt(index:Int, page:Page){
-        subpages.add(index,page)
+        var theIndex= index + 1
+        subpages.add(theIndex,page)
+        page.parent = this
     }
 }
 
@@ -84,8 +84,18 @@ class Page(val theTitle: String, val theMarkdown: String, var theSubpages: Mutab
     }
 
     override fun removeFromParent(){
+        if(parent != null) {
 
-        if(parent != null) parent!!.remove(this)
+            var prevCount = parent!!.subpages.size
+            var prevPages = parent!!.subpages
+            parent!!.subpages.remove(this)
+            var afterCount = parent!!.subpages.size
+            if(prevCount != afterCount + 1){
+                throw InvalidStateException(name + " wasn't removed from parent " + parent + "\n" + prevPages)
+            }
+
+
+        }
     }
 
     fun toJson():String{
