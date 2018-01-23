@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.input.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.web.*?>
 <?import java.lang.*?>
@@ -17,6 +18,11 @@
         <Menu mnemonicParsing="false" text="File">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#open" text="Open…" />
+                  <MenuItem mnemonicParsing="false" onAction="#save" text="Save…">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
           </items>
@@ -47,7 +53,7 @@
                                     <TextField fx:id="name" prefHeight="27.0" prefWidth="154.0" />
                                  </children>
                               </HBox>
-                              <Label text=" Page content (markdown) :" />
+                              <Label id="content_label" text=" Page content (markdown) :" />
                               <TextArea fx:id="markdown" wrapText="true" VBox.vgrow="ALWAYS" />
                               <WebView id="browser" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                            </children>

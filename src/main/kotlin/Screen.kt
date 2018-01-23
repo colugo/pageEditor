@@ -1,38 +1,24 @@
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.util.options.MutableDataSet
 import javafx.application.Application
-import javafx.event.EventType
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.*
-import javafx.scene.input.*
-import javafx.scene.layout.Background
-import javafx.scene.paint.Color
+import javafx.scene.input.DataFormat
+import javafx.scene.input.TransferMode
 import javafx.scene.web.WebView
 import javafx.stage.FileChooser
 import javafx.stage.Stage
-import java.awt.dnd.DragSourceDragEvent
-import java.awt.dnd.DragSourceEvent
+import java.io.File
 import kotlin.system.exitProcess
-import jdk.nashorn.internal.objects.NativeRegExp.source
-import javax.swing.text.Style
-import javax.xml.crypto.Data
-import javafx.scene.input.Dragboard
-import sun.plugin.dom.exception.InvalidStateException
 
 
 class Screen : Application() {
 
-    //val service = Service("service name")
-    //var rootItem:TreeItem<TreeThing> = TreeItem(service)
-//    var tree: TreeView? = null
     var globalCount = 0
     var selectedItem: TreeThing? = null
-//    var title = TextField("Title")
-//    var markdown = TextArea("Markdown")
-//    var browser = WebView()
 
 
     override fun start(stage: Stage) {
@@ -42,10 +28,17 @@ class Screen : Application() {
         Screen.stage = stage
         stage.setTitle("Service Description Tool")
         stage.setScene(scene)
-        stage.show()
 
         lookupComponents()
         addListeners()
+
+        var emptyService = Service("service_name",  mutableListOf<Page>())
+        var rootItem: TreeItem<TreeThing> = newTreeItem(emptyService)
+        tree!!.root = rootItem
+        tree!!.selectionModel.select(tree!!.root)
+        tree!!.refresh()
+
+        stage.show()
 
     }
 
@@ -77,7 +70,6 @@ class Screen : Application() {
                 init {
 
                     setOnDragDetected { event ->
-                        println(event)
 
                         val db = this.startDragAndDrop(TransferMode.MOVE)
                         val treeItem = this.treeItem
@@ -87,14 +79,10 @@ class Screen : Application() {
                     }
 
                     setOnDragDropped { event ->
-                        //println("dropped")
-                        //println(item)
-                        //println(event)
                         val db = event.dragboard
                         val index = db.getContent(DataFormat.PLAIN_TEXT).toString().toInt()
 
                         val source: TreeItem<TreeThing> = tree!!.getTreeItem(index)
-                        println("Move " + source + " under " + treeItem)
 
                         val sourcePage = source.value as Page
                         val destPage = item as Page
@@ -109,26 +97,10 @@ class Screen : Application() {
 
                             val sourcePageParent = sourcePage.parent!!
 
-
-                            //println(sourcePage.parent!!.subpages)
                             sourcePage.removeFromParent()
-                            //println(sourcePage.parent!!.subpages)
-
-                            //println(destPage.subpages)
                             destPage.parent!!.addAt(indexInParent, sourcePage)
-                            //println(destPage.subpages)
-/*
-                            if(source.parent.children.size != sourcePage.parent!!.subpages.size){
-                                throw InvalidStateException("View and MOdel out of sync!")
-                            }
-                            if(treeItem.parent.children.size != destPage.parent!!.subpages.size){
-                                throw InvalidStateException("View and MOdel out of sync!")
-                            }
-*/
                         }
                     }
-                    //setOnDragDone { println("done") }
-
 
                     setOnMouseDragReleased { println("mouse drag") }
 
@@ -164,6 +136,7 @@ class Screen : Application() {
         browser = scene!!.lookup("#browser") as WebView
         title = scene!!.lookup("#name") as TextField
         markdown = scene!!.lookup("#markdown") as TextArea
+        contentLabel = scene!!.lookup("#content_label") as Label
     }
 
     @FXML
@@ -192,15 +165,34 @@ class Screen : Application() {
 
     @FXML
     fun quit() {
-        exitProcess(0)
+        if(!fileChanged) exitProcess(0)
+        println("Save first!")
     }
+
+    @FXML
+    fun save() {
+        if(definitionFile == null){
+            val fileChooser = FileChooser()
+            fileChooser.title = "Save as"
+            definitionFile = fileChooser.showSaveDialog(stage)
+        }
+        if(definitionFile != null && definitionFile is File && fileChanged) {
+            val newConent = tree!!.root.value.output()
+            definitionFile!!.writeText(newConent)
+            contentOnDisk = newConent
+            fileChanged = false
+            stage!!.title = definitionFile!!.name
+        }
+    }
+
 
     @FXML
     fun open(){
         val fileChooser = FileChooser()
         fileChooser.title = "Open Resource File"
-        var file = fileChooser.showOpenDialog(stage)
-        var service = ParseJson().parse(file.readText())
+        definitionFile = fileChooser.showOpenDialog(stage)
+        contentOnDisk = definitionFile!!.readText()
+        var service = ParseJson().parse(contentOnDisk)
         var rootItem: TreeItem<TreeThing> = newTreeItem(service)
 
 
@@ -212,7 +204,9 @@ class Screen : Application() {
             for(subpage in page.subpages) addParsedPages(item as TreeItem<TreeThing>, subpage)
 
         }
+
         tree!!.root = rootItem
+        tree!!.selectionModel.select(tree!!.root)
         tree!!.refresh()
     }
 
@@ -226,25 +220,50 @@ class Screen : Application() {
     fun updateViews(thing:TreeThing){
         selectedItem = thing
         if(thing is Service){
-            title!!.text = thing.name
-            markdown!!.text = thing.output()
+            val service = thing as Service
+            title!!.text = service.name
+            markdown!!.text = service.configuration
+            contentLabel!!.text = "  Service configuration - JSON"
         }
         if(thing is Page){
             title!!.text = thing.name
             markdown!!.text = thing.markdown
             updateSelectedThingMarkdown(thing.markdown)
+            contentLabel!!.text = "  Page content - MarkDown"
+        }
+    }
+
+    fun updateThingsIfFileChanged(){
+        val content = tree!!.root.value.output()
+        if(contentOnDisk.equals(content)){
+            fileChanged = false
+            stage!!.title = definitionFile!!.name
+            return
+        }
+        fileChanged = true
+        if(definitionFile == null){
+            stage!!.title = "Unsaved defintion"
+        }else {
+            stage!!.title = definitionFile!!.name + "*"
         }
     }
 
     fun updateSelectedThingMarkdown(newMarkdown:String){
+
         if(selectedItem != null && selectedItem is Page) {
             var page = selectedItem as Page
             page.markdown = newMarkdown
 
-
             var html = getHTML(getPageData(page, indent = 1))
             browser!!.engine.loadContent(html)
         }
+        if(selectedItem != null && selectedItem is Service) {
+            var service = selectedItem as Service
+            service.configuration = newMarkdown
+
+            browser!!.engine.loadContent("")
+        }
+        updateThingsIfFileChanged()
     }
 
 
@@ -252,7 +271,14 @@ class Screen : Application() {
         if(selectedItem != null && selectedItem is TreeThing) {
             selectedItem!!.name = newName
             tree!!.refresh()
+            if(selectedItem is Page){
+                val page = selectedItem as Page
+                var html = getHTML(getPageData(page, indent = 1))
+                browser!!.engine.loadContent(html)
+            }
         }
+
+        updateThingsIfFileChanged()
     }
 
 
@@ -277,9 +303,8 @@ class Screen : Application() {
         val parser = com.vladsch.flexmark.parser.Parser.builder(options).build()
         val renderer = HtmlRenderer.builder(options).build()
 
-        // You can re-use parser and renderer instances
         val document = parser.parse(md.trimMargin())
-        val html = renderer.render(document)  // "<p>This is <em>Sparta</em></p>\n"
+        val html = renderer.render(document)
         return html
     }
 
@@ -306,6 +331,18 @@ class Screen : Application() {
 
         @JvmStatic
         var markdown: TextArea? = null
+
+        @JvmStatic
+        var contentLabel: Label? = null
+
+        @JvmStatic
+        var definitionFile: File? = null
+
+        @JvmStatic
+        var fileChanged: Boolean = false
+
+        @JvmStatic
+        var contentOnDisk:String = ""
 
     }
 

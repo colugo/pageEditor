@@ -1,6 +1,3 @@
-import com.vladsch.flexmark.html.HtmlRenderer
-import com.vladsch.flexmark.parser.Parser
-import com.vladsch.flexmark.util.options.MutableDataSet
 import sun.plugin.dom.exception.InvalidStateException
 
 val definition = Page("Overview","",
@@ -34,6 +31,8 @@ open abstract class TreeThing{
 }
 
 class Service(val theName:String, private var theSubpages: MutableList<Page> = mutableListOf<Page>()):TreeThing(){
+
+    var configuration:String = ""
 
     init {
         name = theName
