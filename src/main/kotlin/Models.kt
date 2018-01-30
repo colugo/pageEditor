@@ -43,8 +43,19 @@ class Service(val theName:String, private var theSubpages: MutableList<Page> = m
         return toJson()
     }
 
+    fun escapedConfiguration(): String{
+        var output = configuration
+
+        output = output.replace("{","\\{").replace("}","\\}")
+        output = output.replace("\"","\\\"")
+        output = output.replace("\n","\\n")
+
+        return output
+    }
+
     fun toJson():String{
         var output = "{\"name\":\"${name}\","
+        output += "\"configuration\":\"${escapedConfiguration()}\","
         output += "\"subpages\":["
         for(subpage in subpages) output += subpage.toJson() + ","
         output = output.removeSuffix(",")

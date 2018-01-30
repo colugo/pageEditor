@@ -1,5 +1,7 @@
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.util.options.MutableDataSet
+import com.vladsch.flexmark.ext.gfm.tables.TablesExtension
+import com.vladsch.flexmark.parser.Parser
 import javafx.application.Application
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -12,6 +14,7 @@ import javafx.scene.web.WebView
 import javafx.stage.FileChooser
 import javafx.stage.Stage
 import java.io.File
+import java.util.*
 import kotlin.system.exitProcess
 
 
@@ -33,7 +36,19 @@ class Screen : Application() {
         addListeners()
 
         var emptyService = Service("service_name",  mutableListOf<Page>())
+        emptyService.configuration = """{
+    "description":""
+}"""
         var rootItem: TreeItem<TreeThing> = newTreeItem(emptyService)
+
+
+        val gettingStarted = preLoadPage(rootItem, "Getting Started")
+        preLoadPage(gettingStarted, "Key Information")
+        val usingTheApi = preLoadPage(rootItem, "Using the API")
+
+
+        rootItem.isExpanded = true
+
         tree!!.root = rootItem
         tree!!.selectionModel.select(tree!!.root)
         tree!!.refresh()
@@ -41,6 +56,7 @@ class Screen : Application() {
         stage.show()
 
     }
+
 
     private fun newTreeItem(thing: TreeThing): TreeItem<TreeThing> {
         var treeItem = TreeItem<TreeThing>(thing)
@@ -52,7 +68,7 @@ class Screen : Application() {
         tree!!.selectionModel.select(tree!!.root)
         tree!!.getSelectionModel()
                 .selectedItemProperty()
-                .addListener({ observable, oldValue, newValue -> updateViews(newValue.value as TreeThing) })
+                .addListener({ observable, oldValue, newValue -> if(newValue != null) updateViews(newValue.value as TreeThing) })
 
 
         title!!.textProperty().addListener { observable, oldValue, newValue -> updateSelectedThingName(newValue) }
@@ -152,14 +168,19 @@ class Screen : Application() {
     fun newSubPage(){
         if(tree!!.selectionModel.selectedItems.size == 1) {
             val selected = tree!!.selectionModel.selectedItems.first()
-            var newPage = Page("Page" + globalCount++, "")
-            selected.value.add(newPage)
-
-            val item = newTreeItem(newPage)
-
-            selected.children.add(item as TreeItem<TreeThing>)
-            selected.isExpanded = true
+            preLoadPage(selected, "Page" + globalCount++.toString() )
         }
+    }
+
+    private fun preLoadPage(selected: TreeItem<TreeThing>, title:String) : TreeItem<TreeThing>{
+        var newPage = Page(title, "")
+        selected.value.add(newPage)
+
+        val item = newTreeItem(newPage)
+
+        selected.children.add(item as TreeItem<TreeThing>)
+        selected.isExpanded = true
+        return item
     }
 
 
@@ -300,6 +321,8 @@ class Screen : Application() {
 
     private fun getHTML(md:String):String {
         val options = MutableDataSet()
+
+        options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
         val parser = com.vladsch.flexmark.parser.Parser.builder(options).build()
         val renderer = HtmlRenderer.builder(options).build()
 

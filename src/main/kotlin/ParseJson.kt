@@ -4,7 +4,7 @@ import com.beust.klaxon.array
 import com.beust.klaxon.string
 
 data class ServiceDescriptionPage(val title: String, val content: String, val subpages: List<ServiceDescriptionPage>?)
-data class ServiceDescription(val name: String, val id: String, val subpages: List<ServiceDescriptionPage>)
+data class ServiceDescription(val name: String, val configuration: String, val id: String, val subpages: List<ServiceDescriptionPage>)
 
 
 class ParseJson {
@@ -15,12 +15,17 @@ class ParseJson {
 
 
         var name = serviceJson.string("name")
+        var configuration = serviceJson.string("configuration")?:""
+        configuration = configuration!!.replace("\\{","{").replace("\\}","}")
+        configuration = configuration!!.replace("\\\"","\"")
+        configuration = configuration!!.replace("\\n","\n")
 
 
         var pagesList = getSubPages(serviceJson)
-        var serviceDescription = ServiceDescription(name!!, "", pagesList.toList())
+        var serviceDescription = ServiceDescription(name!!, configuration, "", pagesList.toList())
 
         var service = Service(serviceDescription.name)
+        service.configuration = serviceDescription.configuration
         for(pageDescription in serviceDescription.subpages){
             var page = Page(pageDescription.title,pageDescription.content)
             service.add(page)
