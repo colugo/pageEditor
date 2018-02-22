@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PageTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-01-19T03:06:31" hostname="Mac12" time="0.058">
+<testsuite name="PageTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-01-31T02:50:36" hostname="Mac12" time="0.055">
   <properties/>
-  <testcase name="canAddSubpage" classname="PageTest" time="0.058"/>
-  <testcase name="pageAsString" classname="PageTest" time="0.0"/>
+  <testcase name="canAddSubpage" classname="PageTest" time="0.054"/>
+  <testcase name="pageAsString" classname="PageTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
